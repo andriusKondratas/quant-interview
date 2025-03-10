@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://maven.apache.org/POM/4.0.0"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <artifactId>monitor-service</artifactId>
+    <build>
+        <finalName>monitor-service</finalName>
+        <plugins>
+            <plugin>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <artifactId>lombok</artifactId>
+                            <groupId>org.projectlombok</groupId>
+                        </exclude>
+                    </excludes>
+                    <executable>true</executable>
+                </configuration>
+                <groupId>org.springframework.boot</groupId>
+            </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>${jib-maven-plugin.version}</version>
+                <configuration>
+                    <from>
+                        <image>${base.image}</image>
+                    </from>
+                    <to>
+                        <image>monitor-service</image>
+                    </to>
+                    <container>
+                        <mainClass>org.example.monitor.MonitorApplication</mainClass>
+                        <jvmFlags>
+                            <jvmFlag>-XX:MaxRAMPercentage=70</jvmFlag>
+                            <jvmFlag>-Djava.security.egd=file:/dev/urandom</jvmFlag>
+                            <jvmFlag>-Dsecurerandom.source=file:/dev/./urandom</jvmFlag>
+                        </jvmFlags>
+                    </container>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <!-- Internal -->
+        <!-- ************************** -->
+        <!--      Example domain        -->
+        <!-- ************************** -->
+        <dependency>
+            <artifactId>counter-common</artifactId>
+            <groupId>org.example</groupId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>counter-jdbc-store</artifactId>
+            <groupId>org.example</groupId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <!-- External -->
+        <!-- ************************** -->
+        <!--      Of-the-shelve         -->
+        <!-- ************************** -->
+
+        <dependency>
+            <artifactId>spring-boot-devtools</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <optional>true</optional>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+            <groupId>org.springframework.boot</groupId>
+        </dependency>
+
+        <dependency>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <groupId>org.springframework.boot</groupId>
+        </dependency>
+
+        <dependency>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <artifactId>lombok</artifactId>
+            <groupId>org.projectlombok</groupId>
+        </dependency>
+
+        <dependency>
+            <artifactId>commons-io</artifactId>
+            <groupId>commons-io</groupId>
+        </dependency>
+
+        <dependency>
+            <artifactId>opencsv</artifactId>
+            <groupId>com.opencsv</groupId>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <artifactId>h2</artifactId>
+            <groupId>com.h2database</groupId>
+        </dependency>
+
+        <!-- ************************** -->
+        <!--      Test                  -->
+        <!-- ************************** -->
+        <dependency>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <artifactId>reactor-test</artifactId>
+            <groupId>io.projectreactor</groupId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <artifactId>awaitility</artifactId>
+            <groupId>org.awaitility</groupId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>services</artifactId>
+        <groupId>org.example</groupId>
+        <version>1.0.0</version>
+    </parent>
+</project>
