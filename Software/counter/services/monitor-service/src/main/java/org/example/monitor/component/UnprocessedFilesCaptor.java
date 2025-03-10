@@ -22,7 +22,6 @@ public class UnprocessedFilesCaptor {
     return captureFiles(sourcePath, fileBatchLimit, "failed", "processed");
   }
 
-
   public static Set<Path> captureFiles(Path capturePath, int limit,
       String... excludeContaining) {
     log.debug("Reading files from directory: [{}]", capturePath.toFile().getAbsolutePath());

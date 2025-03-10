@@ -21,7 +21,6 @@ public class BasicDiscoveryTest extends BaseIntegrationTest {
 
   @Test
   void should_create_report_file() {
-
     //Switch off scheduler
     doReturn(false).when(discoveryProperties).isReportEnabled();
     doReturn(baseDirectory.toAbsolutePath() + "/source").when(discoveryProperties).getPath();
@@ -35,7 +34,6 @@ public class BasicDiscoveryTest extends BaseIntegrationTest {
 
   @Test
   void should_contain_correct_row_count() throws IOException {
-
     //Switch off scheduler
     doReturn(false).when(discoveryProperties).isReportEnabled();
     doReturn(baseDirectory.toAbsolutePath() + "/source").when(discoveryProperties).getPath();
@@ -54,7 +52,6 @@ public class BasicDiscoveryTest extends BaseIntegrationTest {
 
   @Test
   void should_contain_correct_header_row() throws IOException {
-
     //Switch off scheduler
     doReturn(false).when(discoveryProperties).isReportEnabled();
     doReturn(baseDirectory.toAbsolutePath() + "/source").when(discoveryProperties).getPath();
@@ -81,7 +78,6 @@ public class BasicDiscoveryTest extends BaseIntegrationTest {
 
   @Test
   void should_contain_correct_top_row() throws IOException {
-
     //Switch off scheduler
     doReturn(false).when(discoveryProperties).isReportEnabled();
     doReturn(baseDirectory.toAbsolutePath() + "/source").when(discoveryProperties).getPath();

@@ -14,7 +14,6 @@ public class SourceDirectoryResolver {
   private final MonitorProperties monitorProperties;
 
   public Path resolveSourceDirectory() {
-
     return Path.of(monitorProperties.getSourcePath());
   }
 }

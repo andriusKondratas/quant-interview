@@ -4,12 +4,12 @@
     <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
     <include resource="org/springframework/boot/logging/logback/file-appender.xml"/>
 
-    <springProperty scope="context" name="log.path" source="counter.sink.log-path"
+    <springProperty scope="context" name="log.path" source="monitor.log-path"
             defaultValue="/tmp"/>
     <springProperty scope="context" name="instance.blueprint" source="server.port"
             defaultValue="/tmp"/>
 
-    <property name="LOG_FILE" value="${log.path}/counter-monitor-${instance.blueprint}-service.log"/>
+    <property name="LOG_FILE" value="${log.path}/monitor-${instance.blueprint}-service.log"/>
 
     <springProfile name="dev-local">
         <root>
@@ -23,9 +23,11 @@
     <springProfile name="server">
         <root>
             <appender-ref ref="FILE"/>
+            <appender-ref ref="CONSOLE"/>
         </root>
         <logger name="org.example" additivity="false">
             <appender-ref ref="FILE"/>
+            <appender-ref ref="CONSOLE"/>
         </logger>
     </springProfile>
 

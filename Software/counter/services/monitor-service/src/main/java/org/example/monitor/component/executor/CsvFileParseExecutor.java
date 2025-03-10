@@ -16,7 +16,6 @@ public class CsvFileParseExecutor implements Executable {
 
   @Override
   public boolean execute(Path directory, Path file) {
-
     var v = csvToConnectionDtoReader.read(file);
     counterStore.sinkConnections(v);
 

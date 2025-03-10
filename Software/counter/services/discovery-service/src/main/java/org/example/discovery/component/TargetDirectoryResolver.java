@@ -14,12 +14,10 @@ public class TargetDirectoryResolver {
   private final DiscoveryProperties discoveryProperties;
 
   public Path resolveTargetDirectory() {
-
     return Path.of(discoveryProperties.getPath());
   }
 
   public Path resolveTargetFile() {
-
     return resolveTargetDirectory().resolve(discoveryProperties.getFileName());
   }
 }

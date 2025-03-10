@@ -1,0 +1,27 @@
+Task Requirements:
+
+    Monitor a configurable directory for new files
+    Batch of files frequently copied to the directory by a third-party utility.
+    Files might take time to being fully copied to the directory.
+    Reads the contents of these files and extracts relevant data. (The expected file format is CSV (sample provided below))
+    Each file contains records of network connections, with fields like timestamp, source/destination IP, domain.
+    Ensures duplicate records within each batch of files are not processed.
+    Discovers top 10 domains reported every 1 minute (Aggregation on connections count)
+    Writes discovered tops into a txt file (sample provided below)
+
+Sample Input File (CSV Format)
+
+timestamp,src_ip,src_port,dst_ip,dst_port,domain
+1708867200000,192.168.1.10,5000,10.0.0.5,443,example.com
+1708867205000,192.168.1.11,5001,10.0.0.6,80,test.com
+1708867210000,192.168.1.12,5002,10.0.0.7,443,example.com
+....
+
+Sample Output File (TXT Format)
+
+# Top 10 Domains - 2025-03-01 12:00:00
+1. example.com - 50 connections
+2. test.com - 45 connections
+3. google.com - 30 connections
+4. yahoo.com - 28 connections
+...

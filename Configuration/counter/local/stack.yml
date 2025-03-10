@@ -1,0 +1,63 @@
+name: quant-interview
+services:
+  monitor:
+    image: "monitor-service:${IMAGE_VERSION}"
+    deploy:
+      mode: global
+      replicas: 1
+      resources:
+        reservations:
+          memory: 1024M
+        limits:
+          memory: 1024M
+      restart_policy:
+        condition: any
+    env_file:
+      - "stack.env"
+    environment:
+      - "SERVER_HTTP_PORT=9000"
+    healthcheck:
+      test: "wget --spider http://localhost:9000/actuator/health || exit 1"
+      interval: 5s
+      timeout: 10s
+      retries: 100
+      start_period: 40s
+    volumes:
+      - "counter-data:/counter"
+      - "./input:/input"
+
+  discovery:
+    image: "discovery-service:${IMAGE_VERSION}"
+    depends_on:
+      monitor:
+        condition: service_healthy
+    deploy:
+      replicas: 1
+      mode: global
+      resources:
+        reservations:
+          memory: 1024M
+        limits:
+          memory: 1024M
+      restart_policy:
+        condition: any
+    env_file:
+      - "stack.env"
+    environment:
+      - "SERVER_HTTP_PORT=9001"
+    healthcheck:
+      test: "wget --spider http://localhost:9001/actuator/health || exit 1"
+      interval: 5s
+      timeout: 10s
+      retries: 100
+      start_period: 40s
+    volumes:
+      - "counter-data:/counter"
+      - "./output:/output"
+
+volumes:
+  counter-data:
+
+networks:
+  default:
+    driver: bridge
