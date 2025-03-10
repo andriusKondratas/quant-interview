@@ -57,7 +57,6 @@ public class NetworkConnection {
     networkConnectionDto.setTimestamp(networkConnection.getTimestamp().toInstant(ZoneOffset.UTC).toEpochMilli());
     networkConnectionDto.setDomain(networkConnection.getDomain());
 
-    var t = DigestUtils.md5Digest(networkConnection.blueprint.getBytes());
     return networkConnectionDto;
   }
 }
